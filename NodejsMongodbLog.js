@@ -1,7 +1,9 @@
 const { request } = require("express")
 const express=require("express")
 const app=express()
-app.get("/",(req,res)=>{
-    res.send("hello world")
-})
+app.use('/',express.static('public'))
+app.get("/input",(req,res)=>{
+    res.send(req.query)
+    console.log(req.query)
+ })
 app.listen(10618)
