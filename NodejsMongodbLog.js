@@ -1,3 +1,4 @@
+const ejs=require('ejs')
 const express=require("express")
 const app=express()
 const mongoose = require('mongoose');
@@ -16,8 +17,11 @@ app.use('/',express.static('public'))
 app.get("/input",(req,res)=>{
     res.send(req.query)
     console.log(req.query)
-    //const kitty = new mydata({ name: req.query.first,health:req.query.second });
-    const kitty = new mydata({ name:'aaaa'});
+    const kitty = new mydata({ name: req.query.first,health:req.query.second });
+    //const kitty = new mydata({ name:'aaaa'});
     kitty.save()
+    ejs.renderFile("result.html",{returnVal:"sucess"},(err,str)=>{
+        res.send(str)
+    })
  })
 app.listen(10618)
